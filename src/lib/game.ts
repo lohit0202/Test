@@ -110,8 +110,11 @@ export async function step(): Promise<GameState> {
     const from = trimmed.slice(0, 2);
     const to = trimmed.slice(2, 4);
     const promotion = trimmed.length === 5 ? (trimmed[4] as "q" | "r" | "b" | "n") : undefined;
-    const move = chess.move({ from, to, promotion });
-    const move = chess.move(trimmed, { sloppy: false });
+    const move = chess.move({
+      from,
+      to,
+      promotion,
+    });
     if (!move) {
       lastError = `Illegal move: ${trimmed}`;
       prompt = buildPrompt(fen, side, true, trimmed);
